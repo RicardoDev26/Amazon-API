@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap justify-center gap-32 bg-gray-500">
+    <div class="flex flex-wrap justify-center gap-32">
       <div v-for="producto in productos" :key="producto.product_url">
         <Tarjeta
           :Precio="producto.product_price"
@@ -40,12 +40,11 @@ import { ref } from 'vue';
 const BusquedaReactiva = ref('');
 
 const options = {
-  method: 'GET',
-  headers: {
-    'x-rapidapi-key': '0aed54e031msh4fdc0fc329eb309p1cdb43jsn0e00643695ef',
-    'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com',
-    'Content-Type': 'application/json',
-  },
+	method: 'GET',
+	headers: {
+		'x-rapidapi-key': '3dde7e729dmsh7ebb46fbf95dc00p1270b4jsn326ca1a8c83e',
+		'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
+	}
 };
 const productos = ref([]);
 
