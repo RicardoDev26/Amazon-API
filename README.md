@@ -1,5 +1,23 @@
-# Vue 3 + Vite
+#PeticionesFetch 
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Getting Started
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+
+## Installing
+
+A step by step series of examples that tell you how to get a development env running.
+
+1. Clone the repository.
+2. Open terminal/command prompt and navigate to the project directory.
+3. Run the following command:
+
+```bash
+npm install 
+npm run dev
+```
+## Usage
+
+After running npm run dev, the following services will be available:
+
+-FrontEnd service: http://localhost:5173
