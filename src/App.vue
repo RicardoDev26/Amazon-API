@@ -1,7 +1,8 @@
 <template>
   <section class="flex flex-col gap-9 justify-center items-center">
-    <div class="flex flex-col gap-4">
-      <div class="text-4xl lg:text-6xl text-black font-black">AMAZONONE</div>
+    <div :class="{'search-fixed': productos.length > 0, 'search-center': productos.length == 0}" class="search-container">
+      <div class="text-4xl lg:text-6xl text-black font-black" v-if="productos.length == 0">AMAZONONE</div>
+      <!-- Search input -->
       <div class="relative flex justify-center">
         <input
           v-model="BusquedaReactiva"
@@ -18,7 +19,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap justify-center gap-32">
+    <div class="flex flex-wrap justify-center gap-32 mt-16">
       <div v-for="producto in productos" :key="producto.product_url">
         <Tarjeta
           :Precio="producto.product_price"
@@ -33,35 +34,56 @@
 </template>
 
 <script setup>
-import search from '../src/assets/searchLogo.vue';
-import Tarjeta from './components/Tarjetas.vue';
-import { ref } from 'vue';
+import search from '../src/assets/searchLogo.vue'
+import Tarjeta from './components/Tarjetas.vue'
+import { ref } from 'vue'
 
-const BusquedaReactiva = ref('');
+const BusquedaReactiva = ref('')
 
 const options = {
-	method: 'GET',
-	headers: {
-		'x-rapidapi-key': '3dde7e729dmsh7ebb46fbf95dc00p1270b4jsn326ca1a8c83e',
-		'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
-	}
-};
-const productos = ref([]);
+    method: 'GET',
+    headers: {
+        'x-rapidapi-key': '3dde7e729dmsh7ebb46fbf95dc00p1270b4jsn326ca1a8c83e',
+        'x-rapidapi-host': 'real-time-amazon-data.p.rapidapi.com'
+    }
+}
+const productos = ref([])
 
 const Busqueda = async () => {
   try {
-    const response = await fetch(`https://real-time-amazon-data.p.rapidapi.com/search?query=${BusquedaReactiva.value}&page=1&country=US&sort_by=RELEVANCE&product_condition=ALL`, options);
-    const result = await response.json();
-    productos.value = result.data.products;
-    console.log(result.data.products);
+    const response = await fetch(`https://real-time-amazon-data.p.rapidapi.com/search?query=${BusquedaReactiva.value}&page=1&country=US&sort_by=RELEVANCE&product_condition=ALL`, options)
+    const result = await response.json()
+    productos.value = result.data.products
+    console.log(result.data.products)
   } catch (error) {
-    console.error(error);
+    console.error(error)
   }
-};
+}
 </script>
 
 <style scoped>
-/* body {
-  background-color: #6b7280;
-} */
+.search-container {
+  transition: all 0.3s ease;
+}
+
+.search-center {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.search-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 </style>
